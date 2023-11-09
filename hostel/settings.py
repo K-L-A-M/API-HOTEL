@@ -76,6 +76,8 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'hostel.urls'
 
+INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + MY_APPS
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
