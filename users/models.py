@@ -3,6 +3,7 @@ from django.contrib.auth.models import AbstractUser
 from uuid import uuid4
 import re
 from django.core.exceptions import ValidationError
+from rooms.models import Room
 
 
 def validate_contact(value):
@@ -21,5 +22,7 @@ class User(AbstractUser):
     cpf = models.CharField(max_length=14, null=False, unique=True)
     nationality = models.CharField(max_length=50)
     emergency_contact = models.CharField(max_length=15, blank=True)
-    is_superuser = models.BooleanField(default=False)
     is_employee = models.BooleanField(default=False)
+    is_manager = models.BooleanField(default=False)
+    is_administrator = models.BooleanField(default=False)
+    favorite_rooms = models.ManyToManyField(Room, related_name='favorited_by', blank=True)
