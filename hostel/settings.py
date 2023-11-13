@@ -62,6 +62,7 @@ MY_APPS = [
     "rooms",
     "transactions",
     "promotions",
+    "checklist",
 ]
 
 MIDDLEWARE = [
