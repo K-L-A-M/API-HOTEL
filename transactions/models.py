@@ -21,8 +21,3 @@ class Transaction(models.Model):
     amount_paid = models.DecimalField(max_digits=8, decimal_places=2, validators=[MinValueValidator(0)])
     discount_percentage = models.PositiveIntegerField(default=0, validators=[MinValueValidator(0), MaxValueValidator(100)])
     discount_amount = models.DecimalField(max_digits=8, decimal_places=2, default=0)
-
-    def save(self, *args, **kwargs):
-        self.user_cpf = self.user.cpf
-        self.user_name = self.user.name
-        super().save(*args, **kwargs)
