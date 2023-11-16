@@ -6,6 +6,13 @@ from django.core.exceptions import ValidationError
 from rooms.models import Room
 
 
+class TypeUser(models.TextChoices):
+    ADMIN = "AD", "Admin"
+    USER = "US", "User"
+    EMPLOYEE = "EM", "Employee"
+    MANAGER = "MA", "Manager"
+
+
 def validate_contact(value):
     regex = re.compile(
         r'^(?:(?:\+|00)?(\d{1,3}))?[-. (]*(\d{1,3})[-. )]*(\d{1,4})(?:[-. ]*(\d{1,4}))?(?:[-. ]*(\d{1,9}))?$'
@@ -22,7 +29,5 @@ class User(AbstractUser):
     cpf = models.CharField(max_length=14, null=False, unique=True)
     nationality = models.CharField(max_length=50)
     emergency_contact = models.CharField(max_length=15, blank=True)
-    is_employee = models.BooleanField(default=False)
-    is_manager = models.BooleanField(default=False)
-    is_administrator = models.BooleanField(default=False)
+    user_type = models.CharField(choices=TypeUser.choices, default=TypeUser.USER)
     favorite_rooms = models.ManyToManyField(Room, related_name='favorited_by', blank=True)
