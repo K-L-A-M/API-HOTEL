@@ -5,22 +5,22 @@ from users.models import TypeUser
 
 class IsGuestPermission(BasePermission):
     def has_permission(self, request, view):
-        return request.user.is_authenticated and request.user.user_type == TypeUser.USER
+        return request.user.is_authenticated and request.user.type_user == TypeUser.USER
 
 
 class IsEmployeePermission(BasePermission):
     def has_permission(self, request, view):
-        return request.user.is_authenticated and request.user.user_type == TypeUser.EMPLOYEE
+        return request.user.is_authenticated and request.user.type_user == TypeUser.EMPLOYEE
 
 
 class IsManagerPermission(BasePermission):
     def has_permission(self, request, view):
-        return request.user.is_authenticated and request.user.user_type == TypeUser.MANAGER
+        return request.user.is_authenticated and request.user.type_user == TypeUser.MANAGER
 
 
 class IsAdministratorPermission(BasePermission):
     def has_permission(self, request, view):
-        return request.user.is_authenticated and request.user.user_type == TypeUser.ADMIN
+        return request.user.is_authenticated and request.user.type_user == TypeUser.ADMIN
 
 
 class IsUserPermission(BasePermission):
@@ -35,14 +35,14 @@ class IsAnyUserPermission(BasePermission):
 
 class IsEmployeeOrManagerPermission(BasePermission):
     def has_permission(self, request, view):
-        return request.user.is_authenticated and (request.user.user_type == TypeUser.EMPLOYEE or request.user.user_type == TypeUser.MANAGER)
+        return request.user.is_authenticated and (request.user.type_user == TypeUser.EMPLOYEE or request.user.type_user == TypeUser.MANAGER)
 
 
 class IsManagerOrAdministratorPermission(BasePermission):
     def has_permission(self, request, view):
-        return request.user.is_authenticated and (request.user.user_type == TypeUser.MANAGER or request.user.user_type == TypeUser.ADMIN)
+        return request.user.is_authenticated and (request.user.type_user == TypeUser.MANAGER or request.user.type_user == TypeUser.ADMIN)
 
 
 class IsEmployeeOrManagerOrAdministratorPermission(BasePermission):
     def has_permission(self, request, view):
-        return request.user.is_authenticated and (request.user.user_type == TypeUser.EMPLOYEE or request.user.user_type == TypeUser.MANAGER or request.user.user_type == TypeUser.ADMIN)
+        return request.user.is_authenticated and (request.user.type_user == TypeUser.EMPLOYEE or request.user.type_user == TypeUser.MANAGER or request.user.type_user == TypeUser.ADMIN)

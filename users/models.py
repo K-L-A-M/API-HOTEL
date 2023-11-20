@@ -22,12 +22,15 @@ def validate_contact(value):
 
 
 class User(AbstractUser):
+    USERNAME_FIELD = "email"
     id = models.UUIDField(primary_key=True, default=uuid4, editable=False)
+    username = models.CharField(null=True, blank=True)
     email = models.EmailField(unique=True, null=False)
     name = models.CharField(null=False, max_length=150)
     contact = models.CharField(max_length=15, null=False, validators=[validate_contact])
     cpf = models.CharField(max_length=14, null=False, unique=True)
     nationality = models.CharField(max_length=50)
     emergency_contact = models.CharField(max_length=15, blank=True)
-    user_type = models.CharField(choices=TypeUser.choices, default=TypeUser.USER)
+    type_user = models.CharField(choices=TypeUser.choices, default=TypeUser.USER)
     favorite_rooms = models.ManyToManyField(Room, related_name='favorited_by', blank=True)
+    REQUIRED_FIELDS = [email]

@@ -10,7 +10,7 @@ User = get_user_model()
 
 class UserSerializer(serializers.ModelSerializer):
     id = serializers.UUIDField(format='hex', read_only=True)
-    username = serializers.CharField(required=False)
+    username = serializers.CharField(required=False, allow_blank=True)
     email = serializers.EmailField(validators=[
         UniqueValidator(
             queryset=User.objects.all(),
@@ -53,6 +53,7 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         fields = [
             "id",
+            "username",
             "email",
             "password",
             "name",
