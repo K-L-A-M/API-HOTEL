@@ -4,11 +4,11 @@ from uuid import uuid4
 
 
 class PromotionType(models.TextChoices):
-    NoPromotion = "no promotion"
-    BreakFast = "breakfast"
-    DiscountInDaily = "discount in daily"
-    ExtendedStayDiscount = "extended stay discount"
-    Discount = "discount"
+    NoPromotion = "No Promotion", "NP"
+    BreakFast = "BreakFast", "BF"
+    DiscountInDaily = "Discount in Daily", "DD"
+    ExtendedStayDiscount = "Extended stay Discount", "ED"
+    Discount = "discount", "D"
 
 
 class Promotion(models.Model):

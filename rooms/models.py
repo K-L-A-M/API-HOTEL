@@ -8,10 +8,10 @@ class RoomFeature(models.Model):
 
 
 class BedType(models.TextChoices):
-    SINGLE = "Single"
-    DOUBLE = "Double"
-    KING_SIZE = "King Size"
-    QUEEN_SIZE = "Queen Size"
+    SINGLE = "Single", "S"
+    DOUBLE = "Double", "D"
+    KING_SIZE = "King Size", "KS"
+    QUEEN_SIZE = "Queen Size", "QS"
 
 
 class Room(models.Model):
