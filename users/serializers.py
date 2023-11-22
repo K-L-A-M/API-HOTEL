@@ -4,7 +4,6 @@ from rest_framework.validators import UniqueValidator
 from rooms.models import Room
 from users.models import TypeUser
 
-
 User = get_user_model()
 
 
@@ -53,6 +52,16 @@ class UserSerializer(serializers.ModelSerializer):
 
         return instance
 
+    def format_cpf(self, value):
+        if value and len(value) == 11:
+            return f"{value[:3]}.{value[3:6]}.{value[6:9]}-{value[9:]}"
+        return value
+
+    def format_contact(self, value):
+        if value and len(value) >= 10:
+            return f"({value[:2]}) {value[2:6]}-{value[6:]}"
+        return value
+
     class Meta:
         model = User
         fields = [
@@ -72,3 +81,9 @@ class UserSerializer(serializers.ModelSerializer):
             "password": {"write_only": True},
             "favorite_rooms": {"read_only": True}
         }
+
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        representation['cpf'] = self.format_cpf(representation.get('cpf', ''))
+        representation['contact'] = self.format_contact(representation.get('contact', ''))
+        return representation
