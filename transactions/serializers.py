@@ -69,7 +69,7 @@ class TransactionSerializer(serializers.ModelSerializer):
             'user': {
                 'id': user_id,
                 'name': user_name,
-                'cpf': user.cpf,
+                'cpf': self.format_cpf(user.cpf),
             },
             'amount_paid': amount_paid,
             'timestamp': transaction.timestamp,
@@ -79,3 +79,8 @@ class TransactionSerializer(serializers.ModelSerializer):
         }
 
         return response_data
+
+    def format_cpf(self, value):
+        if value and len(value) == 11:
+            return f"{value[:3]}.{value[3:6]}.{value[6:9]}-{value[9:]}"
+        return value
