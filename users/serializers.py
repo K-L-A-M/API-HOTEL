@@ -45,6 +45,10 @@ class UserSerializer(serializers.ModelSerializer):
                 continue
             setattr(instance, key, value)
 
+        if not self.partial:
+            instance.add(validated_data)
+            return instance
+
         instance.save()
 
         return instance

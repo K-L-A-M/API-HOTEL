@@ -1,6 +1,12 @@
 from rest_framework.permissions import BasePermission, SAFE_METHODS
-
 from users.models import TypeUser
+
+
+class IsOwnerOrEmployeeOrManagerOrAdministratorPermission(BasePermission):
+    def has_object_permission(self, request, view, obj):
+        if request.user.is_authenticated and request.user == obj:
+            return True
+        return request.user.is_authenticated and (request.user.type_user == TypeUser.EMPLOYEE or request.user.type_user == TypeUser.MANAGER or request.user.type_user == TypeUser.ADMIN)
 
 
 class IsGuestPermission(BasePermission):
